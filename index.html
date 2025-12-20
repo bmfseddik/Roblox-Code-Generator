@@ -1,47 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Code Generator</title>
-</head>
-<body>
+<script>
+  const VALID_KEYS = [
+    "admincode112233onlyforadmins",
+    "Code1forsubscribers",
+    "codegivenbyadmin123"
+    "atestcode123@123@yesno#yes"
+    ];
 
-  <h1>Code Generator</h1>
+  function randomBlock() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let block = "";
+    for (let i = 0; i < 4; i++) {
+      block += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return block;
+  }
 
-  <input id="secret" placeholder="Enter secret key">
-  <br><br>
-  <button onclick="generate()">Generate</button>
+  function generate() {
+    const key = document.getElementById("secret").value;
+    const output = document.getElementById("output");
 
-  <p id="output"></p>
-
-  <script>
-    const REQUIRED_KEY = "CODEGENERATOR123ATBG90FORYOU";
-
-    function randomBlock() {
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-      let block = "";
-      for (let i = 0; i < 4; i++) {
-        block += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return block;
+    if (!VALID_KEYS.includes(key)) {
+      output.textContent = "Wrong key";
+      return;
     }
 
-    function generate() {
-      const key = document.getElementById("secret").value;
-      const output = document.getElementById("output");
-
-      if (key !== REQUIRED_KEY) {
-        output.textContent = "Wrong key";
-        return;
-      }
-
-      output.textContent =
-        randomBlock() + "-" +
-        randomBlock() + "-" +
-        randomBlock() + "-" +
-        randomBlock();
-    }
-  </script>
-
-</body>
-</html>
+    output.textContent =
+      randomBlock() + "-" +
+      randomBlock() + "-" +
+      randomBlock() + "-" +
+      randomBlock();
+  }
+</script>
